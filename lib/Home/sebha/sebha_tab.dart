@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:islami/my_theme.dart';
+import 'package:islami/providers/app_config_provider.dart';
+import 'package:provider/provider.dart';
 
 class sebha_Tab extends StatefulWidget {
   @override
@@ -18,6 +19,7 @@ class _sebha_TabState extends State<sebha_Tab> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigprovider>(context);
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -26,21 +28,29 @@ class _sebha_TabState extends State<sebha_Tab> {
             Container(
               margin: EdgeInsets.only(
                 left: MediaQuery.of(context).size.width * 0.25,
+                right: MediaQuery.of(context).size.width * 0.16,
                 top: MediaQuery.of(context).size.height * 0.018,
               ),
-              child:
-                  Image(image: AssetImage('assets/images/head_sebha_logo.png')),
+              child: provider.isDark()
+                  ? Image(
+                      image: AssetImage('assets/images/head_sebha_dark.png'))
+                  : Image(
+                      image: AssetImage('assets/images/head_sebha_logo.png')),
             ),
             Container(
                 margin: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.11,
-                    left: MediaQuery.of(context).size.width * 0.01),
+                  top: MediaQuery.of(context).size.height * 0.11,
+                  left: MediaQuery.of(context).size.width * 0.01,
+                  right: MediaQuery.of(context).size.width * 0.012,
+                ),
                 child: GestureDetector(
                   onTap: _rotateImage,
                   child: Transform.rotate(
                     angle: _rotationAngle,
-                    child: Image.asset(
-                        'assets/images/body_sebha_logo.png'), // Replace 'your_image.png' with the actual path to your image
+                    child: provider.isDark()
+                        ? Image.asset('assets/images/body_sebha_dark.png')
+                        : Image.asset(
+                            'assets/images/body_sebha_logo.png'), // Replace 'your_image.png' with the actual path to your image
                   ),
                 ))
           ]),
@@ -50,25 +60,25 @@ class _sebha_TabState extends State<sebha_Tab> {
                   bottom: MediaQuery.of(context).size.height * 0.03),
               child: Text(
                 'عدد التسبيحات',
-                style: Theme.of(context).textTheme.titleMedium,
+                style: Theme.of(context).textTheme.titleLarge,
               )),
           Container(
               margin: EdgeInsets.all(MediaQuery.of(context).size.height * 0.03),
               padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
               decoration: BoxDecoration(
-                color: My_Theme.primaryLightColor,
+                color: Theme.of(context).primaryColor,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Text('$_tapCount',
-                  style: TextStyle(fontSize: 20, color: My_Theme.whiteColor))),
+                  style: Theme.of(context).textTheme.titleMedium)),
           Container(
             padding: EdgeInsets.symmetric(vertical: 12, horizontal: 24),
             decoration: BoxDecoration(
-              color: My_Theme.primaryLightColor,
+              color: Theme.of(context).primaryColor,
               borderRadius: BorderRadius.circular(30),
             ),
             child: Text(azkarList[index],
-                style: TextStyle(fontSize: 20, color: My_Theme.whiteColor)),
+                style: Theme.of(context).textTheme.titleMedium),
           ),
         ],
       ),
@@ -76,6 +86,7 @@ class _sebha_TabState extends State<sebha_Tab> {
   }
 
   int _tapCount = 0;
+
   void _rotateImage() {
     setState(() {
       _tapCount++;

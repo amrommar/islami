@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islami/Home/quran/item_sura_details.dart';
 import 'package:islami/Home/quran/quran_tab.dart';
 import 'package:islami/my_theme.dart';
+import 'package:islami/providers/app_config_provider.dart';
+import 'package:provider/provider.dart';
 
 class SuraDetailsScreen extends StatefulWidget {
   static const String routeName = 'SuraDetailsScreen';
@@ -16,23 +19,31 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigprovider>(context);
     var args = ModalRoute.of(context)?.settings.arguments as SuraDetailsArgs;
     if (verses.isEmpty) {
       loadFile(args.index);
     }
     return Stack(children: [
-      Image.asset(
-        'assets/images/main_background.png',
-        height: double.infinity,
-        width: double.infinity,
-        fit: BoxFit.fill,
-      ),
+      provider.isDark()
+          ? Image.asset(
+              'assets/images/main_background_dark.png',
+              height: double.infinity,
+              width: double.infinity,
+              fit: BoxFit.fill,
+            )
+          : Image.asset(
+              'assets/images/main_background.png',
+              height: double.infinity,
+              width: double.infinity,
+              fit: BoxFit.fill,
+            ),
       Scaffold(
         appBar: AppBar(
           centerTitle: true,
           backgroundColor: Colors.transparent,
           title: Text(
-            'Islami',
+            AppLocalizations.of(context)!.app_Title,
             style: Theme.of(context).textTheme.titleLarge,
           ),
         ),
@@ -42,7 +53,9 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
               horizontal: MediaQuery.of(context).size.width * 0.05,
               vertical: MediaQuery.of(context).size.height * 0.06),
           decoration: BoxDecoration(
-              color: My_Theme.whiteColor,
+              color: provider.isDark()
+                  ? My_Theme.primaryDarkColor
+                  : My_Theme.whiteColor,
               borderRadius: BorderRadius.circular(30)),
           child: Column(
             children: [
@@ -52,7 +65,9 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
               ),
               Divider(
                 thickness: 2,
-                color: My_Theme.primaryLightColor,
+                color: provider.isDark()
+                    ? My_Theme.yellowColor
+                    : My_Theme.primaryLightColor,
               ),
               verses.isEmpty
                   ? Center(
@@ -67,7 +82,9 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
                           separatorBuilder: (context, index) {
                             return Divider(
                               thickness: 1,
-                              color: My_Theme.primaryLightColor,
+                              color: provider.isDark()
+                                  ? My_Theme.yellowColor
+                                  : My_Theme.primaryLightColor,
                             );
                           },
                           itemBuilder: (context, index) {
