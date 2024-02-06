@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islami/Home/Hadeth/hadeth_tab.dart';
 import 'package:islami/Home/Hadeth/item_hadeth_details.dart';
 import 'package:islami/my_theme.dart';
@@ -27,7 +28,7 @@ class _SuraDetailsScreenState extends State<HadethDetailsScreen> {
           centerTitle: true,
           backgroundColor: Colors.transparent,
           title: Text(
-            'Islami',
+            AppLocalizations.of(context)!.app_Title,
             style: Theme.of(context).textTheme.titleLarge,
           ),
         ),

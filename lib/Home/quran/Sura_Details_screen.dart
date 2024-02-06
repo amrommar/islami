@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islami/Home/quran/item_sura_details.dart';
 import 'package:islami/Home/quran/quran_tab.dart';
 import 'package:islami/my_theme.dart';
@@ -32,7 +33,7 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
           centerTitle: true,
           backgroundColor: Colors.transparent,
           title: Text(
-            'Islami',
+            AppLocalizations.of(context)!.app_Title,
             style: Theme.of(context).textTheme.titleLarge,
           ),
         ),

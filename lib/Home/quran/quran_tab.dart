@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islami/Home/quran/item_sura_name_ayat.dart';
 import 'package:islami/my_theme.dart';
 
@@ -235,6 +236,7 @@ class Quran_Tab extends StatelessWidget {
     '5',
     '6',
   ];
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -253,7 +255,7 @@ class Quran_Tab extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.45,
                 child: Center(
                   child: Text(
-                    'Sura Name',
+                    AppLocalizations.of(context)!.sura_Name,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                 ),
@@ -268,7 +270,7 @@ class Quran_Tab extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.45,
                 child: Center(
                   child: Text(
-                    'Number of Ayat',
+                    AppLocalizations.of(context)!.number_OfAyat,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                 ),
@@ -305,5 +307,6 @@ class Quran_Tab extends StatelessWidget {
 class SuraDetailsArgs {
   int index;
   String name;
+
   SuraDetailsArgs({required this.index, required this.name});
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islami/Home/Hadeth/item_hadethname.dart';
 
 import '../../my_theme.dart';
@@ -26,7 +27,7 @@ class _Hadeth_TabState extends State<Hadeth_Tab> {
         ),
         Center(
           child: Text(
-            'Hadeth Name',
+            AppLocalizations.of(context)!.hadeth_Name,
             style: Theme.of(context).textTheme.titleMedium,
           ),
         ),
@@ -75,5 +76,6 @@ class _Hadeth_TabState extends State<Hadeth_Tab> {
 class Hadeth {
   String title;
   List<String> content;
+
   Hadeth({required this.title, required this.content});
 }

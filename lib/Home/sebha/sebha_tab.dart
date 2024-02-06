@@ -26,6 +26,7 @@ class _sebha_TabState extends State<sebha_Tab> {
             Container(
               margin: EdgeInsets.only(
                 left: MediaQuery.of(context).size.width * 0.25,
+                right: MediaQuery.of(context).size.width * 0.16,
                 top: MediaQuery.of(context).size.height * 0.018,
               ),
               child:
@@ -33,8 +34,10 @@ class _sebha_TabState extends State<sebha_Tab> {
             ),
             Container(
                 margin: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.11,
-                    left: MediaQuery.of(context).size.width * 0.01),
+                  top: MediaQuery.of(context).size.height * 0.11,
+                  left: MediaQuery.of(context).size.width * 0.01,
+                  right: MediaQuery.of(context).size.width * 0.012,
+                ),
                 child: GestureDetector(
                   onTap: _rotateImage,
                   child: Transform.rotate(
@@ -76,6 +79,7 @@ class _sebha_TabState extends State<sebha_Tab> {
   }
 
   int _tapCount = 0;
+
   void _rotateImage() {
     setState(() {
       _tapCount++;
