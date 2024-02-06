@@ -5,7 +5,8 @@ import 'package:islami/Home/quran/quran_tab.dart';
 import 'package:islami/Home/radio/radio_tab.dart';
 import 'package:islami/Home/sebha/sebha_tab.dart';
 import 'package:islami/Home/settings/settings_Tab.dart';
-import 'package:islami/my_theme.dart';
+import 'package:islami/providers/app_config_provider.dart';
+import 'package:provider/provider.dart';
 
 class Home_Screen extends StatefulWidget {
   static const String routeName = 'HomeScreen';
@@ -19,14 +20,22 @@ class _Home_ScreenState extends State<Home_Screen> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigprovider>(context);
     return Stack(
       children: [
-        Image.asset(
-          'assets/images/main_background.png',
-          height: double.infinity,
-          width: double.infinity,
-          fit: BoxFit.fill,
-        ),
+        provider.isDark()
+            ? Image.asset(
+                'assets/images/main_background_dark.png',
+                height: double.infinity,
+                width: double.infinity,
+                fit: BoxFit.fill,
+              )
+            : Image.asset(
+                'assets/images/main_background.png',
+                height: double.infinity,
+                width: double.infinity,
+                fit: BoxFit.fill,
+              ),
         Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
@@ -39,7 +48,7 @@ class _Home_ScreenState extends State<Home_Screen> {
           ),
           bottomNavigationBar: Theme(
             data: Theme.of(context).copyWith(
-              canvasColor: My_Theme.primaryLightColor,
+              canvasColor: Theme.of(context).primaryColor,
             ),
             child: BottomNavigationBar(
               currentIndex: selectedIndex,

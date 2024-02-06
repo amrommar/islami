@@ -3,6 +3,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islami/Home/Hadeth/hadeth_tab.dart';
 import 'package:islami/Home/Hadeth/item_hadeth_details.dart';
 import 'package:islami/my_theme.dart';
+import 'package:islami/providers/app_config_provider.dart';
+import 'package:provider/provider.dart';
 
 class HadethDetailsScreen extends StatefulWidget {
   static const String routeName = 'HadethDetailsScreen';
@@ -14,15 +16,23 @@ class HadethDetailsScreen extends StatefulWidget {
 class _SuraDetailsScreenState extends State<HadethDetailsScreen> {
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigprovider>(context);
     var args = ModalRoute.of(context)?.settings.arguments as Hadeth;
 
     return Stack(children: [
-      Image.asset(
-        'assets/images/main_background.png',
-        height: double.infinity,
-        width: double.infinity,
-        fit: BoxFit.fill,
-      ),
+      provider.isDark()
+          ? Image.asset(
+              'assets/images/main_background_dark.png',
+              height: double.infinity,
+              width: double.infinity,
+              fit: BoxFit.fill,
+            )
+          : Image.asset(
+              'assets/images/main_background.png',
+              height: double.infinity,
+              width: double.infinity,
+              fit: BoxFit.fill,
+            ),
       Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -38,7 +48,9 @@ class _SuraDetailsScreenState extends State<HadethDetailsScreen> {
               horizontal: MediaQuery.of(context).size.width * 0.06,
               vertical: MediaQuery.of(context).size.height * 0.05),
           decoration: BoxDecoration(
-              color: My_Theme.whiteColor,
+              color: provider.isDark()
+                  ? My_Theme.primaryDarkColor
+                  : My_Theme.whiteColor,
               borderRadius: BorderRadius.circular(30)),
           child: Column(
             children: [
@@ -51,7 +63,9 @@ class _SuraDetailsScreenState extends State<HadethDetailsScreen> {
               ),
               Divider(
                 thickness: 2,
-                color: My_Theme.primaryLightColor,
+                color: provider.isDark()
+                    ? My_Theme.yellowColor
+                    : My_Theme.primaryLightColor,
               ),
               Expanded(
                 child: Padding(

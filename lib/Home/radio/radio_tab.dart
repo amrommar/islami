@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:islami/my_theme.dart';
+import 'package:islami/providers/app_config_provider.dart';
+import 'package:provider/provider.dart';
 
 class Radio_Tab extends StatelessWidget {
   const Radio_Tab({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigprovider>(context);
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -16,7 +19,7 @@ class Radio_Tab extends StatelessWidget {
                 vertical: MediaQuery.of(context).size.height * 0.04),
             child: Text(
               'إذاعة القرآن الكريم',
-              style: Theme.of(context).textTheme.titleMedium,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
           ),
           Container(
@@ -29,7 +32,9 @@ class Radio_Tab extends StatelessWidget {
                   onPressed: () {},
                   icon: Icon(
                     Icons.skip_previous,
-                    color: My_Theme.primaryLightColor,
+                    color: provider.isDark()
+                        ? My_Theme.yellowColor
+                        : My_Theme.primaryLightColor,
                     size: 30,
                   ),
                 ),
@@ -37,7 +42,9 @@ class Radio_Tab extends StatelessWidget {
                   onPressed: () {},
                   icon: Icon(
                     Icons.play_arrow,
-                    color: My_Theme.primaryLightColor,
+                    color: provider.isDark()
+                        ? My_Theme.yellowColor
+                        : My_Theme.primaryLightColor,
                     size: 50,
                   ),
                 ),
@@ -45,7 +52,9 @@ class Radio_Tab extends StatelessWidget {
                   onPressed: () {},
                   icon: Icon(
                     Icons.skip_next,
-                    color: My_Theme.primaryLightColor,
+                    color: provider.isDark()
+                        ? My_Theme.yellowColor
+                        : My_Theme.primaryLightColor,
                     size: 30,
                   ),
                 )

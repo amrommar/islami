@@ -27,6 +27,8 @@ class MyApp extends StatelessWidget {
         HadethDetailsScreen.routeName: (context) => HadethDetailsScreen(),
       },
       theme: My_Theme.lightTheme,
+      themeMode: provider.appTheme,
+      darkTheme: My_Theme.darkTheme,
       locale: Locale(provider.appLanguage),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,

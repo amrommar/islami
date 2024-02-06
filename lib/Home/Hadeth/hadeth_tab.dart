@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islami/Home/Hadeth/item_hadethname.dart';
+import 'package:islami/providers/app_config_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../my_theme.dart';
 
@@ -15,6 +17,7 @@ class _Hadeth_TabState extends State<Hadeth_Tab> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigprovider>(context);
     if (hadethList.isEmpty) {
       loadFile();
     }
@@ -22,7 +25,9 @@ class _Hadeth_TabState extends State<Hadeth_Tab> {
       children: [
         Center(child: Image.asset('assets/images/hadeth_logo.png')),
         Divider(
-          color: My_Theme.primaryLightColor,
+          color: provider.isDark()
+              ? My_Theme.yellowColor
+              : My_Theme.primaryLightColor,
           thickness: 3,
         ),
         Center(
@@ -32,18 +37,24 @@ class _Hadeth_TabState extends State<Hadeth_Tab> {
           ),
         ),
         Divider(
-          color: My_Theme.primaryLightColor,
+          color: provider.isDark()
+              ? My_Theme.yellowColor
+              : My_Theme.primaryLightColor,
           thickness: 3,
         ),
         hadethList.isEmpty
             ? CircularProgressIndicator(
-                color: My_Theme.primaryLightColor,
+                color: provider.isDark()
+                    ? My_Theme.yellowColor
+                    : My_Theme.primaryLightColor,
               )
             : Expanded(
                 child: ListView.separated(
                 separatorBuilder: (context, index) {
                   return Divider(
-                    color: My_Theme.primaryLightColor,
+                    color: provider.isDark()
+                        ? My_Theme.yellowColor
+                        : My_Theme.primaryLightColor,
                     thickness: 2,
                   );
                 },

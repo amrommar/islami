@@ -4,12 +4,12 @@ import 'package:islami/my_theme.dart';
 import 'package:islami/providers/app_config_provider.dart';
 import 'package:provider/provider.dart';
 
-class language_Bottom_Sheet extends StatefulWidget {
+class mode_Bottom_Sheet extends StatefulWidget {
   @override
-  State<language_Bottom_Sheet> createState() => _language_Bottom_SheetState();
+  State<mode_Bottom_Sheet> createState() => _mode_Bottom_SheetState();
 }
 
-class _language_Bottom_SheetState extends State<language_Bottom_Sheet> {
+class _mode_Bottom_SheetState extends State<mode_Bottom_Sheet> {
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<AppConfigprovider>(context);
@@ -23,25 +23,23 @@ class _language_Bottom_SheetState extends State<language_Bottom_Sheet> {
         children: [
           InkWell(
               onTap: () {
-                provider.changeLanguage('en');
+                provider.changeMode(ThemeMode.light);
               },
-              child: provider.appLanguage == 'en'
-                  ? getSelectedItemWidget(
-                      AppLocalizations.of(context)!.english, context)
-                  : getUnselectedItemWidget(
-                      AppLocalizations.of(context)!.english, context)),
+              child: provider.isDark()
+                  ? getUnselectedItemWidget(AppLocalizations.of(context)!.light)
+                  : getSelectedItemWidget(
+                      AppLocalizations.of(context)!.light, context)),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.03,
           ),
           InkWell(
               onTap: () {
-                provider.changeLanguage('ar');
+                provider.changeMode(ThemeMode.dark);
               },
-              child: provider.appLanguage == 'ar'
+              child: provider.isDark()
                   ? getSelectedItemWidget(
-                      AppLocalizations.of(context)!.arabic, context)
-                  : getUnselectedItemWidget(
-                      AppLocalizations.of(context)!.arabic, context))
+                      AppLocalizations.of(context)!.dark, context)
+                  : getUnselectedItemWidget(AppLocalizations.of(context)!.dark))
         ],
       ),
     );
@@ -66,18 +64,15 @@ class _language_Bottom_SheetState extends State<language_Bottom_Sheet> {
     );
   }
 
-  Widget getUnselectedItemWidget(String text, context) {
-    var provider = Provider.of<AppConfigprovider>(context);
+  Widget getUnselectedItemWidget(String text) {
     return Row(
       children: [
         Text(
           text,
-          style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                fontWeight: FontWeight.w400,
-                color: provider.isDark()
-                    ? My_Theme.whiteColor
-                    : My_Theme.blackColor,
-              ),
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge!
+              .copyWith(fontWeight: FontWeight.w400),
         ),
       ],
     );
